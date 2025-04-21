@@ -3,6 +3,7 @@
 /* for GPIO test to pass you need to connect GPIN0 to GPOUT7, GPIN1 to GPOUT6, etc. */
 /* otherwise press any key after getting GPIO error to complete the test */
 /**/
+
 #include <usbhub.h>
 
 // Satisfy the IDE, which needs to see the include statment in the ino too.
@@ -26,6 +27,7 @@ USB Usb;
 void setup() {
         laststate = 0;
         Serial.begin(115200);
+        
 #if !defined(__MIPSEL__)
         while(!Serial); // Wait for serial port to connect - used on Leonardo, Teensy and other boards with built-in USB CDC serial connection
 #endif
@@ -33,6 +35,11 @@ void setup() {
         E_Notify(PSTR("\r\nUSB Host Shield Quality Control Routine"), 0x80);
         /* SPI quick test - check revision register */
         E_Notify(PSTR("\r\nReading REVISION register... Die revision "), 0x80);
+
+        SPI.begin(25, 27, 26, 33);     // <‑‑ remap pins for ttgo
+        pinMode(33, OUTPUT);
+        digitalWrite(33, HIGH);
+        
         Usb.Init(); // Initializes SPI, we don't care about the return value here
         {
                 uint8_t tmpbyte = Usb.regRd(rREVISION);

@@ -51,7 +51,7 @@ typedef MAX3421e<P15, P5> MAX3421E; // ESP8266 boards
 #elif defined(ARDUINO_XIAO_ESP32S3)
 typedef MAX3421e<P44, P4> MAX3421E; // ESP32 XIAO boards
 #elif defined(ESP32)
-typedef MAX3421e<P5, P17> MAX3421E; // ESP32 boards
+typedef MAX3421e<P33, P17> MAX3421E; // ttgo t-display-v1.1 boards
 #elif defined(ARDUINO_Seeed_XIAO_nRF52840_Sense)
 typedef MAX3421e<P7, P5> MAX3421E; // Seeed_XIAO_nRF52840_Sense
 #elif defined(MIGHTYCORE)
