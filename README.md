@@ -22,6 +22,30 @@ GPIO26 : MOSI
 
 Regular ESP32's that use the old pin layout will not work. Use original repo for common ESP32's instead
 
+Before you call `USB.Init()`, make sure to insert `SPI.begin(25, 27, 26, 33);` into your .ino sketch.
+
+Example:
+```
+void setup()
+{
+  Serial.begin( 115200 );
+  SPI.begin(25, 27, 26, 33);     // <‑‑ remap pins for ttgo
+  
+#if !defined(__MIPSEL__)
+  while (!Serial); // Wait for serial port to connect - used on Leonardo, Teensy and other boards with built-in USB CDC serial connection
+#endif
+
+  Serial.println("Start");
+  if (Usb.Init() == -1)
+      Serial.println("OSC did not start.");
+  delay( 200 );
+
+  if (!Hid.SetReportParser(0, &Joy))
+      ErrorMessage<uint8_t>(PSTR("SetReportParser"), 1  );
+}
+
+```
+
 The code is released under the GNU General Public License.
 __________
 [![](https://github.com/felis/USB_Host_Shield_2.0/workflows/CI/badge.svg)](https://github.com/felis/USB_Host_Shield_2.0/actions?query=branch%3Amaster)
