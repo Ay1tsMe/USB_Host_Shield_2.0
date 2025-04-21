@@ -1,5 +1,27 @@
 # USB Host Library Rev. 2.0
 
+The fork has been modified to reassign the ESP32 SPI pins to the pins for the ttgo T-Display v1.1
+
+The pins have been changed from:
+```
+GPIO5  : SS
+GPIO17 : INT
+GPIO18 : SCK
+GPIO19 : MISO
+GPIO23 : MOSI
+```
+
+to:
+```
+GPIO33 : SS
+GPIO17 : INT
+GPIO25 : SCK
+GPIO27 : MISO
+GPIO26 : MOSI
+```
+
+Regular ESP32's that use the old pin layout will not work. Use original repo for common ESP32's instead
+
 The code is released under the GNU General Public License.
 __________
 [![](https://github.com/felis/USB_Host_Shield_2.0/workflows/CI/badge.svg)](https://github.com/felis/USB_Host_Shield_2.0/actions?query=branch%3Amaster)
